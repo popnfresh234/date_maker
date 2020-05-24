@@ -1,14 +1,12 @@
 const ONE_WEEK = 7;
-const DAYS_IN_MS = 24 * 60 * 60 * 1000;
 
 // weeksToLookBack:  0 for current week
 const getWeekNWeeksAgo = ( n ) => {
   const currentDate = new Date();
   const dateArr = [];
-  const startingTime = n * ONE_WEEK * DAYS_IN_MS;
-  const startingDate = new Date( currentDate.getTime() - startingTime );
+  const startingDate = new Date( new Date().setDate( currentDate.getDate() - ( n * ONE_WEEK ) ) );
   for ( let i = 0; i < ONE_WEEK; i += 1 ) {
-    dateArr.push( new Date( startingDate.getTime() - ( DAYS_IN_MS * i ) ) );
+    dateArr.push( new Date( new Date().setDate( startingDate.getDate() - i ) ) );
   }
   return dateArr;
 };
@@ -32,9 +30,7 @@ const getTwentyFourHourPeriodFromDate = ( date ) => {
   return { startTime, endTime };
 };
 
-
-// console.log( getTwentyFourHourPeriodFromDate( new Date() ) );
-console.log( getDateNDaysAgo( 2 ) );
+console.log( getWeekNWeeksAgo( 1 ) );
 
 module.exports = {
   getWeekNWeeksAgo,
