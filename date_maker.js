@@ -33,10 +33,6 @@ const getDayRangeNDaysAgo = ( n ) => {
   return getStartAndEndTimes( date );
 };
 
-
-// console.log( getStartAndEndTimes( new Date() ) );
-console.log( getDayRangeNDaysAgo( 1 ) );
-
 module.exports = {
   getWeekRangeNWeeksAgo,
   getDayRangeNDaysAgo,
