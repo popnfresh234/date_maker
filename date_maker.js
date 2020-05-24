@@ -13,14 +13,6 @@ const getWeekNWeeksAgo = ( n ) => {
   return dateArr;
 };
 
-const getSameDayNDaysAgo = ( n ) => {
-  const date = new Date();
-  const arr = [];
-  const sameDayLastWeek = new Date( date.getTime() - ( n * DAYS_IN_MS ) );
-  arr.push( date );
-  arr.push( sameDayLastWeek );
-  return arr;
-};
 
 const getMonth = ( date ) => {
   let month = date.getMonth() + 1;
@@ -30,28 +22,22 @@ const getMonth = ( date ) => {
   return month;
 };
 
-const getTwentyFourHourPeriod = ( currentDate, daysAgo ) => {
+const getDateNDaysAgo = n => new Date( new Date().setDate( new Date().getDate() - n ) );
+
+const getTwentyFourHourPeriodFromDate = ( date ) => {
   // 2020-05-24T02:48:01-08:00
-  const targetDate = new Date().setDate( currentDate.getDate() - daysAgo );
-  const offset = currentDate.getTimezoneOffset() / 60;
-  console.log( targetDate );
-
-  const startTime = `${currentDate.getFullYear()}-${getMonth( currentDate )}-${currentDate.getDate()}T00:00:00-0${offset}:00`;
-  const endTime = `${currentDate.getFullYear()}-${getMonth( currentDate )}-${currentDate.getDate()}T23:59:59-0${offset}:00`;
-
-  // const targetStartTime = `${targetDate.getFullYear()}-${getMonth( targetDate )}-${targetDate.getDate()}T00:00:00-0${offset}:00`;
-  // const targetEndTime = `${currentDate.getFullYear()}-${getMonth( targetDate )}-${targetDate.getDate()}T23:59:59-0${offset}:00`;
-
-  console.log( startTime, endTime );
-  // console.log( targetStartTime, targetEndTime );
+  const offset = date.getTimezoneOffset() / 60;
+  const startTime = `${date.getFullYear()}-${getMonth( date )}-${date.getDate()}T00:00:00-0${offset}:00`;
+  const endTime = `${date.getFullYear()}-${getMonth( date )}-${date.getDate()}T23:59:59-0${offset}:00`;
+  return { startTime, endTime };
 };
 
 
-// getTwentyFourHourPeriod( new Date(), 0 );
-getTwentyFourHourPeriod( new Date(), 1 );
-
+// console.log( getTwentyFourHourPeriodFromDate( new Date() ) );
+console.log( getDateNDaysAgo( 2 ) );
 
 module.exports = {
   getWeekNWeeksAgo,
-  getSameDayNDaysAgo,
+  getTwentyFourHourPeriodFromDate,
+  getDateNDaysAgo,
 };
