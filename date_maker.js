@@ -22,6 +22,8 @@ const getStartAndEndTimes = ( startDate, endDate ) => {
 // weeksToLookBack:  0 for current week
 const getWeekRangeNWeeksAgo = ( n ) => {
   const currentDate = new Date();
+
+
   const startDate = new Date( new Date().setDate( currentDate.getDate() - ( n * ONE_WEEK ) ) );
   const endDate = new Date( new Date().setDate( startDate.getDate() - 6 ) );
   return getStartAndEndTimes( startDate, endDate );
@@ -32,6 +34,16 @@ const getDayRangeNDaysAgo = ( n ) => {
   const date = new Date( new Date().setDate( new Date().getDate() - n ) );
   return getStartAndEndTimes( date );
 };
+
+
+const date = new Date( new Date().setDate( new Date().getDate() - 1 ) );
+console.log( date.getDay( ) );
+// 1.
+// Get current date, find day of week.  This is the _end_ time
+
+// 2.
+// Create a new date and offset by the current day of the week,
+// this will run us back to the nearest sunday, this is the _start_ time
 
 module.exports = {
   getWeekRangeNWeeksAgo,
