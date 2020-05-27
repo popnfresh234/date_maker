@@ -13,19 +13,22 @@ const getStartAndEndTimes = ( startDate, endDate ) => {
   if ( !endDate ) endDate = new Date( startDate );
   const startOffset = startDate.getTimezoneOffset() / 60;
   const endOffset = endDate.getTimezoneOffset() / 60;
-  const endTime = `${startDate.getFullYear()}-${getMonth( startDate )}-${startDate.getDate()}T00%3A00%3A00-0${startOffset}%3A00`;
-  const startTime = `${endDate.getFullYear()}-${getMonth( endDate )}-${endDate.getDate()}T23%3A59%3A59-0${endOffset}%3A00`;
+  const startTime = `${startDate.getFullYear()}-${getMonth( startDate )}-${startDate.getDate()}T00%3A00%3A00-0${startOffset}%3A00`;
+  const endTime = `${endDate.getFullYear()}-${getMonth( endDate )}-${endDate.getDate()}T23%3A59%3A59-0${endOffset}%3A00`;
   return { startTime, endTime };
 };
 
 
 // weeksToLookBack:  0 for current week
 const getWeekRangeNWeeksAgo = ( n ) => {
-  const currentDate = new Date();
+  const currentDate = new Date( new Date().setDate( new Date().getDate() - ( n * ONE_WEEK ) ) );
+  console.log( currentDate );
 
+  const startDate = new Date( new Date().setDate( currentDate.getDate() - currentDate.getDay() ) );
+  const endDate = new Date( new Date().setDate( currentDate.getDate() + ( 6 - currentDate.getDay() ) ) );
 
-  const startDate = new Date( new Date().setDate( currentDate.getDate() - ( n * ONE_WEEK ) ) );
-  const endDate = new Date( new Date().setDate( startDate.getDate() - 6 ) );
+  console.log( startDate );
+  console.log( endDate );
   return getStartAndEndTimes( startDate, endDate );
 };
 
@@ -35,15 +38,6 @@ const getDayRangeNDaysAgo = ( n ) => {
   return getStartAndEndTimes( date );
 };
 
-
-const date = new Date( new Date().setDate( new Date().getDate() - 1 ) );
-console.log( date.getDay( ) );
-// 1.
-// Get current date, find day of week.  This is the _end_ time
-
-// 2.
-// Create a new date and offset by the current day of the week,
-// this will run us back to the nearest sunday, this is the _start_ time
 
 module.exports = {
   getWeekRangeNWeeksAgo,
