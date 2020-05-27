@@ -26,6 +26,11 @@ const getWeekRangeNWeeksAgo = ( n ) => {
   const startDate = new Date( new Date().setDate( currentDate.getDate() - currentDate.getDay() ) );
   const endDate = new Date( new Date().setDate( currentDate.getDate() + ( 6 - currentDate.getDay() ) ) );
   return getStartAndEndTimes( startDate, endDate );
+
+
+  // TODO
+  // This doesn't work because square V1 API only returns max of 200 tx
+  // Need to break this up into 24 hour period for _each_ day and make multiple requests.
 };
 
 
