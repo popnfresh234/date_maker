@@ -22,13 +22,9 @@ const getStartAndEndTimes = ( startDate, endDate ) => {
 // weeksToLookBack:  0 for current week
 const getWeekRangeNWeeksAgo = ( n ) => {
   const currentDate = new Date( new Date().setDate( new Date().getDate() - ( n * ONE_WEEK ) ) );
-  console.log( currentDate );
 
   const startDate = new Date( new Date().setDate( currentDate.getDate() - currentDate.getDay() ) );
   const endDate = new Date( new Date().setDate( currentDate.getDate() + ( 6 - currentDate.getDay() ) ) );
-
-  console.log( startDate );
-  console.log( endDate );
   return getStartAndEndTimes( startDate, endDate );
 };
 
